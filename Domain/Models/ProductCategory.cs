@@ -25,18 +25,12 @@ public class ProductCategory : BaseEntity, IHaveSoftDelete
     /// </summary>
     public Seo Seo { get; set; }
 
-    /// <summary>
-    /// ‍پراپرتی های عکس
-    /// </summary>
-    public required Picture Picture { get; set; }
-
     [SetsRequiredMembers]
     public ProductCategory()
     {
         Name = string.Empty;
         Description = string.Empty;
         Seo = new Seo();
-        Picture = new Picture();
     }
 
     [SetsRequiredMembers]
@@ -46,6 +40,5 @@ public class ProductCategory : BaseEntity, IHaveSoftDelete
         Name = string.Empty;
         Description = string.Empty;
         Seo = new Seo();
-        Picture = new Picture();
     }
 }

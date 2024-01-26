@@ -31,10 +31,10 @@ public class Picture : BaseEntity, ICanDisable
     public required bool IsDefault { get; set; }
 
     //must be shadow property
-    /// <summary>
-    /// نوع عکس
-    /// </summary>
-    public required PictureType PictureType { get; set; }
+    ///// <summary>
+    ///// نوع عکس
+    ///// </summary>
+    //public required PictureType PictureType { get; set; }
 
     [SetsRequiredMembers]
     public Picture()
