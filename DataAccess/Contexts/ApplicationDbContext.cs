@@ -1,19 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Context.Extensions;
-using Domain.Models;
+﻿using System.Reflection;
+using BaseLib.Context.Extensions;
 
 namespace DataAccess.Contexts;
 
 /// <summary>
 /// کلاس زمینه پایگاه داده برنامه
 /// </summary>
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext //DbContextCore
 {
     /// <summary>
     /// سازنده کلاس
     /// </summary>
-    public ApplicationDbContext(DbContextOptions options) : base()
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
 
@@ -29,4 +27,9 @@ public class ApplicationDbContext : DbContext
     /// دسته بندی های محصول
     /// </summary>
     public required DbSet<ProductCategory> ProductCategories { get; set; } = default!;
+
+    ///// <summary>
+    ///// عکس ها
+    ///// </summary>
+    //public required DbSet<Picture> Pictures { get; set; } = default!;
 }
