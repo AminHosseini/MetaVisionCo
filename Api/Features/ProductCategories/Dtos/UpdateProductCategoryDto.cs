@@ -5,10 +5,6 @@
 /// </summary>
 public record class UpdateProductCategoryDto : CreateProductCategoryDto
 {
-    /// <summary>
-    /// آیدی نوع محصول
-    /// </summary>
-    public required long Id { get; set; }
 
     /// <summary>
     /// دسته بندی محصول RowVersion مقدار

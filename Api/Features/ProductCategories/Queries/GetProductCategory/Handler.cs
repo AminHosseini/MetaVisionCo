@@ -31,10 +31,12 @@ public class Handler : IRequestHandler<Query, GetProductCategoryDto>
         if (request is null)
             throw new RecordNotFoundException();
 
-        var query = await _context.ProductCategories.AsNoTracking()
-            .FirstOrDefaultAsync(pc => pc.Id == request.ProductCategoryId
-                && !EF.Property<bool>(pc, ShadowProperty.IsDeleted), cancellationToken);
+        var query = _context.ProductCategories.AsNoTracking()
+            .Where(pc => pc.Id == request.ProductCategoryId);
 
-        return query.Adapt<GetProductCategoryDto>();
+        if (!query.Any())
+            throw new RecordNotFoundException();
+
+        return await query.ProjectToType<GetProductCategoryDto>().FirstOrDefaultAsync(cancellationToken);
     }
 }

@@ -16,3 +16,4 @@ global using DataAccess.Contexts;
 global using Api.Features.Commons.Dtos;
 global using Api.Features.ProductCategories.Dtos;
 global using Api.Extensions;
+global using Api.Filters;

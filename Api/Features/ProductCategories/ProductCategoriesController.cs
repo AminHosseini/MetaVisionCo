@@ -3,7 +3,7 @@
 /// <summary>
 /// برای کار با دسته بندی های محصول
 /// </summary>
-//[EnableQueryWithMetadata]
+[EnableQueryWithMetadata]
 public class ProductCategoriesController : ApiControllerBase
 {
     #region Queries

@@ -29,18 +29,17 @@ public static class ServiceCollectionExtension
         return services;
     }
 
-    //public static IEdmModel GetEdmModel()
-    //{
-    //    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    //    builder.EntitySet<Personnel>("Personnel")
-    //        .EntityType
-    //        .Filter()
-    //        .Count()
-    //        //.Expand()
-    //        .OrderBy()
-    //        .Page()
-    //        .Select();
+    public static IEdmModel GetEdmModel()
+    {
+        ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+        builder.EntitySet<ProductCategory>("ProductCategory")
+            .EntityType
+            .Filter()
+            .Count()
+            .OrderBy()
+            .Select()
+            .Page();
 
-    //    return builder.GetEdmModel();
-    //}
+        return builder.GetEdmModel();
+    }
 }

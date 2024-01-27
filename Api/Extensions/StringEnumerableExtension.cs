@@ -2,12 +2,21 @@
 
 public static class StringEnumerableExtension
 {
-    public static string HashtagifyList(this IEnumerable<string>? keywords)
+    public static string? Hashtagify(this IEnumerable<string>? keywords)
     {
         if (!keywords!.Any())
-            return string.Empty;
+            return null;
 
-        keywords!.ToList().ForEach(kw => kw.Slugify());
-        return string.Join(' ', keywords!);
+        var list = new List<string>();
+        keywords!.ToList().ForEach(kw => list.Add(kw.Slugify()));
+        return string.Join(' ', list);
+    }
+
+    public static IEnumerable<string>? ListHashtags(this string? hashtagsString)
+    {
+        if (string.IsNullOrWhiteSpace(hashtagsString))
+            return null;
+
+        return hashtagsString.Split(' ').AsEnumerable();
     }
 }

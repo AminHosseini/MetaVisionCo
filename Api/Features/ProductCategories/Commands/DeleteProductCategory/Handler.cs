@@ -31,14 +31,32 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
         if (request is null)
             throw new RecordNotFoundException();
 
-        var productCategory = new ProductCategory(request.IdRowVersion.Id);
+        var productCategory = await _context.ProductCategories
+            .FirstOrDefaultAsync(pc => pc.Id == request.IdRowVersion.Id, cancellationToken);
+
+        if (productCategory is null)
+            throw new RecordNotFoundException();
+
         _context.ProductCategories.Entry(productCategory).SetRowVersionCurrentValue(request.IdRowVersion.RowVersion);
+        var isDeleted = _context.ProductCategories.Entry(productCategory).Property<bool>(ShadowProperty.IsDeleted).CurrentValue;
 
-        var currentState = _context.ProductCategories.Entry(productCategory).Property<bool>(ShadowProperty.IsDeleted).CurrentValue;
-        _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.IsDeleted, !currentState);
+        if (isDeleted)
+        {
+            _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.DeleteDate, null);
+            _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.DeletedByUser, null);
+        }
+        else
+        {
+            _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.DeleteDate, DateTimeOffset.UtcNow);
+            // This must be later replaced with a real user
+            _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.DeletedByUser, Guid.NewGuid());
+        }
 
+        _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.IsDeleted, !isDeleted);
         _context.ProductCategories.Attach(productCategory);
         _context.ProductCategories.Entry(productCategory).Property(ShadowProperty.IsDeleted).IsModified = true;
+        _context.ProductCategories.Entry(productCategory).Property(ShadowProperty.DeleteDate).IsModified = true;
+        _context.ProductCategories.Entry(productCategory).Property(ShadowProperty.DeletedByUser).IsModified = true;
         await _context.SaveChangesAsync(cancellationToken);
 
         var rowVersion = _context.Entry(productCategory)
