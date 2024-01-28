@@ -33,8 +33,13 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
 
         var productCategory = request.UpdateProductCategoryDto.Adapt<ProductCategory>();
         productCategory.Id = request.ProductCategoryId;
-        _context.Entry(productCategory).SetRowVersionCurrentValue(request.UpdateProductCategoryDto.RowVersion);
 
+        var productCategoryData = await _context.ProductCategories.AsNoTracking()
+            .FirstOrDefaultAsync(pc => pc.Id == productCategory.Id, cancellationToken);
+        if (productCategoryData is null)
+            throw new RecordNotFoundException();
+
+        _context.Entry(productCategory).SetRowVersionCurrentValue(request.UpdateProductCategoryDto.RowVersion);
         _context.ProductCategories.Update(productCategory);
         await _context.SaveChangesAsync(cancellationToken);
 

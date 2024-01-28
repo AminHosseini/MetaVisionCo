@@ -10,6 +10,9 @@ public class CreateProductCategoryDtoValidator : AbstractValidator<CreateProduct
     /// </summary>
     public CreateProductCategoryDtoValidator()
     {
+        RuleFor(pc => pc.ParentId)
+            .NotEqual(0).WithMessage(ValidationMessages.NullMessage);
+
         RuleFor(pc => pc.Name)
             .NotEmpty().WithMessage(ValidationMessages.NullMessage)
             .MaximumLength(50).WithMessage(ValidationMessages.MaximumCharactersMessage(50));
