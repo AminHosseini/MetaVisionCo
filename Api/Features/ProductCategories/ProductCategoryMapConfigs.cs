@@ -34,6 +34,7 @@ public static class ProductCategoryMapConfigs
         TypeAdapterConfig<ProductCategory, GetAllProductCategoriesDto>
             .ForType()
             .Map(dest => dest.ProductCategoryId, src => src.Id)
+            .Map(dest => dest.ProductCategoryIdFarsi, src => src.Id.ToPersianNumber())
             .Map(dest => dest.IsDeleted, src => EF.Property<bool>(src, ShadowProperty.IsDeleted))
             .Map(dest => dest.RowVersion, src => EF.Property<byte[]>(src, ShadowProperty.RowVersion));
     }

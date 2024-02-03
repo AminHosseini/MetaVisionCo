@@ -11,6 +11,11 @@ public readonly record struct GetAllProductCategoriesDto
     public required long ProductCategoryId { get; init; }
 
     /// <summary>
+    /// آیدی فارسی دسته بندی محصول
+    /// </summary>
+    public required string ProductCategoryIdFarsi { get; init; }
+
+    /// <summary>
     /// حذف شده؟
     /// </summary>
     public required bool IsDeleted { get; init; }

@@ -87,6 +87,14 @@ builder.Services.AddDbContext<ApplicationDbContext>((serviceProvider, optionsBui
     .AddInterceptors(serviceProvider.GetRequiredService<MetaDataInterceptor>());
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+    });
+});
+
 builder.Services.AddMapsterConfigurationsServices();
 
 builder.Services.AddApplicationServices();
