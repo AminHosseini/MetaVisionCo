@@ -14,7 +14,7 @@ public class ProductCategoriesController : ApiControllerBase
     /// <param name="objectId">آیدی دسته بندی محصول</param>
     /// <param name="cancellationToken"></param>
     /// <returns>اطلاعات یک دسته بندی محصول</returns>
-    [HttpGet("{objectId:long:min(1)}")]
+    [HttpGet("product-categories/{objectId:long:min(1)}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetProductCategoryDto))]
     public Task<GetProductCategoryDto> GetProductCategoryAsync([Required] long objectId, CancellationToken cancellationToken)
     {
@@ -27,7 +27,7 @@ public class ProductCategoriesController : ApiControllerBase
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>اطلاعات دسته بندی های محصول</returns>
-    [HttpGet]
+    [HttpGet("product-categories")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<GetAllProductCategoriesDto>))]
     public Task<IQueryable<GetAllProductCategoriesDto>> GetAllProductCategoriesAsync(CancellationToken cancellationToken)
     {
@@ -45,7 +45,7 @@ public class ProductCategoriesController : ApiControllerBase
     /// <param name="createProductCategory">اطلاعات دسته بندی محصول برای ایجاد</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Created Id And RowVersion</returns>
-    [HttpPost]
+    [HttpPost("product-categories")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("application/json")]
     public Task<IdRowVersionGet> CreateProductCategoryAsync([Required] CreateProductCategoryDto createProductCategory, CancellationToken cancellationToken)
@@ -61,7 +61,7 @@ public class ProductCategoriesController : ApiControllerBase
     /// <param name="updateProductCategory">اطلاعات دسته بندی محصول برای ویرایش</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Updated Id And RowVersion</returns>
-    [HttpPut("{objectId:long:min(1)}")]
+    [HttpPut("product-categories/{objectId:long:min(1)}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("application/json")]
     public Task<IdRowVersionGet> UpdateProductCategoryAsync(long objectId, [Required] UpdateProductCategoryDto updateProductCategory, CancellationToken cancellationToken)
@@ -76,7 +76,7 @@ public class ProductCategoriesController : ApiControllerBase
     /// <param name="idRowVersion">اطلاعات دسته بندی محصول که قرار است حذف شود و یا برگردد</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Deleted Id And RowVersion</returns>
-    [HttpPatch]
+    [HttpPatch("product-categories")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("application/json")]
     public Task<IdRowVersionGet> DeleteProductCategoryAsync([FromBody][Required] IdRowVersion idRowVersion, CancellationToken cancellationToken)
