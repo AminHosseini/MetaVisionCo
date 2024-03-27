@@ -13,6 +13,7 @@ public static class ProductCategoryMapConfigs
         // CreateProductCategory
         TypeAdapterConfig<CreateProductCategoryDto, ProductCategory>
             .ForType()
+            .Map(dest => dest.ParentId, src => src.ParentId == 0 ? null : src.ParentId)
             .Map(dest => dest.Seo.Slug, src => src.Seo!.Slug!.Slugify())
             .Map(dest => dest.Seo.Keywords, src => src.Seo!.Keywords.Hashtagify());
 
