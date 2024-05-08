@@ -33,8 +33,8 @@ public class Handler : IRequestHandler<Query, IQueryable<GetAllProductCategories
 
         var query = _context.ProductCategories.AsNoTracking();
 
-        if (!query.Any())
-            throw new RecordNotFoundException();
+        //if (!query.Any())
+        //    throw new RecordNotFoundException();
 
         return Task.FromResult(query.ProjectToType<GetAllProductCategoriesDto>());
     }
