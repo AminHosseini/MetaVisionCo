@@ -8,6 +8,8 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.OData;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Options;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +35,14 @@ builder.Services.AddControllers(configure =>
         .Select()
         .SetMaxTop(250)
         .AddRouteComponents("api", edmModel))
-    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new RowVersionValueConverter()));
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Converters.Add(new RowVersionValueConverter());
+            options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            //options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
+            //options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        });
 
 builder.Services.AddEndpointsApiExplorer();
 
