@@ -32,6 +32,10 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
             throw new RecordNotFoundException();
 
         var productCategory = request.CreateProductCategoryDto.Adapt<ProductCategory>();
+        _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.CreationDate, DateTimeOffset.UtcNow);
+        // This 1 must later be replaced by a real user
+        _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.CreatedByUser, (long)1);
+
         await _context.ProductCategories.AddAsync(productCategory, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 

@@ -49,7 +49,7 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
         {
             _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.DeleteDate, DateTimeOffset.UtcNow);
             // This must be later replaced with a real user
-            _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.DeletedByUser, Guid.NewGuid());
+            _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.DeletedByUser, (long)1);
         }
 
         _context.ProductCategories.Entry(productCategory).SetCurrentValue(ShadowProperty.IsDeleted, !isDeleted);

@@ -17,7 +17,7 @@ public class ApplicationDbContext : DbContext //DbContextCore
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("Shop");
+        //modelBuilder.HasDefaultSchema("Shop");
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         modelBuilder.ApplyAll();
@@ -28,8 +28,8 @@ public class ApplicationDbContext : DbContext //DbContextCore
     /// </summary>
     public required DbSet<ProductCategory> ProductCategories { get; set; } = default!;
 
-    ///// <summary>
-    ///// عکس ها
-    ///// </summary>
-    //public required DbSet<Picture> Pictures { get; set; } = default!;
+    /// <summary>
+    /// عکس ها
+    /// </summary>
+    public required DbSet<Picture> Pictures { get; set; } = default!;
 }

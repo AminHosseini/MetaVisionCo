@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using Api.Helpers;
 using BaseLib.Application.Extensions;
-using BaseLib.Context.Interceptors;
+//using BaseLib.Context.Interceptors;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.OData;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
@@ -87,13 +87,13 @@ builder.Services.AddProblemDetails();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.TryAddSingleton<MetaDataInterceptor>();
+//builder.Services.TryAddSingleton<MetaDataInterceptor>();
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<ApplicationDbContext>((serviceProvider, optionsBuilder) =>
 {
-    optionsBuilder.UseSqlServer(connectionString)
-    .AddInterceptors(serviceProvider.GetRequiredService<MetaDataInterceptor>());
+    optionsBuilder.UseSqlServer(connectionString);
+    //.AddInterceptors(serviceProvider.GetRequiredService<MetaDataInterceptor>());
 });
 
 builder.Services.AddCors(options =>

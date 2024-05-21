@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class ProductCategory_Added : Migration
+    public partial class ProductCategorycreated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,11 +27,12 @@ namespace DataAccess.Migrations
                     Seo_Slug = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false, comment: "اسلاگ برای سئو"),
                     Seo_Keywords = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false, comment: "کلمات کلیدی برای سئو"),
                     Seo_MetaDescription = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false, comment: "توضیحات متا برای سئو"),
+                    _CreatedByUser = table.Column<long>(type: "bigint", nullable: false, comment: "کاربر سازنده"),
+                    _CreationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, comment: "تاریخ ساخت"),
                     _DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true, comment: "تاریخ حذف"),
-                    _DeletedByUser = table.Column<Guid>(type: "uniqueidentifier", nullable: true, comment: "کاربر حذف کننده"),
+                    _DeletedByUser = table.Column<long>(type: "bigint", nullable: true, comment: "کاربر حذف کننده"),
                     _IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    _RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false, comment: "بررسی همزمانی"),
-                    SerialNumber = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "(newsequentialid())", comment: "شماره سریال برای ارتباط با باقی سیستم ها")
+                    _RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false, comment: "بررسی همزمانی")
                 },
                 constraints: table =>
                 {

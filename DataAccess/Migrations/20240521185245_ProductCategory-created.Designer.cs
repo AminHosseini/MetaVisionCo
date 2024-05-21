@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240127104809_ProductCategory_Added")]
-    partial class ProductCategory_Added
+    [Migration("20240521185245_ProductCategory-created")]
+    partial class ProductCategorycreated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,18 +50,20 @@ namespace DataAccess.Migrations
                         .HasColumnType("bigint")
                         .HasComment("آیدی دسته بندی اصلی محصول");
 
-                    b.Property<Guid>("SerialNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("(newsequentialid())")
-                        .HasComment("شماره سریال برای ارتباط با باقی سیستم ها");
+                    b.Property<long>("_CreatedByUser")
+                        .HasColumnType("bigint")
+                        .HasComment("کاربر سازنده");
+
+                    b.Property<DateTimeOffset>("_CreationDate")
+                        .HasColumnType("datetimeoffset")
+                        .HasComment("تاریخ ساخت");
 
                     b.Property<DateTimeOffset?>("_DeleteDate")
                         .HasColumnType("datetimeoffset")
                         .HasComment("تاریخ حذف");
 
-                    b.Property<Guid?>("_DeletedByUser")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<long?>("_DeletedByUser")
+                        .HasColumnType("bigint")
                         .HasComment("کاربر حذف کننده");
 
                     b.Property<bool>("_IsDeleted")

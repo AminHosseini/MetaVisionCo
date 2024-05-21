@@ -16,11 +16,6 @@ public readonly record struct GetProductCategoryDto
     public required bool IsDeleted { get; init; }
 
     /// <summary>
-    /// شماره سریال دسته بندی محصول
-    /// </summary>
-    public required Guid SerialNumber { get; init; }
-
-    /// <summary>
     /// دسته بندی محصول RowVersion مقدار
     /// </summary>
     public required RowVersionValue RowVersion { get; init; }

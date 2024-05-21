@@ -3,7 +3,7 @@
 /// <summary>
 /// دسته بندی محصول
 /// </summary>
-public class ProductCategory : BaseEntity, IHaveSoftDelete
+public class ProductCategory : BaseEntity, IHaveSoftDelete, IHaveCreationInfo
 {
     /// <summary>
     /// آیدی دسته بندی اصلی محصول

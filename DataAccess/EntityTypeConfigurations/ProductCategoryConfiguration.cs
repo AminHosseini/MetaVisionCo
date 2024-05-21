@@ -12,7 +12,7 @@ public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCate
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder = builder.ToTable(
+        builder = builder.ToTable("ProductCategories", "Shop",
             t => t.HasComment("دسته بندی های محصول")
         );
 

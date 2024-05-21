@@ -11,19 +11,9 @@ public readonly record struct GetAllProductCategoriesDto
     public required long ProductCategoryId { get; init; }
 
     /// <summary>
-    /// آیدی فارسی دسته بندی محصول
-    /// </summary>
-    public required string ProductCategoryIdFarsi { get; init; }
-
-    /// <summary>
     /// حذف شده؟
     /// </summary>
     public required bool IsDeleted { get; init; }
-
-    /// <summary>
-    /// شماره سریال دسته بندی محصول
-    /// </summary>
-    public required Guid SerialNumber { get; init; }
 
     /// <summary>
     /// دسته بندی محصول RowVersion مقدار

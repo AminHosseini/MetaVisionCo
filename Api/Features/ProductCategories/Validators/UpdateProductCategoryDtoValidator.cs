@@ -10,8 +10,8 @@ public class UpdateProductCategoryDtoValidator : AbstractValidator<UpdateProduct
     /// </summary>
     public UpdateProductCategoryDtoValidator()
     {
-        RuleFor(pc => pc.ParentId)
-            .NotEqual(0).WithMessage(ValidationMessages.NullMessage);
+        //RuleFor(pc => pc.ParentId)
+        //    .NotEqual(0).WithMessage(ValidationMessages.NullMessage);
 
         RuleFor(pc => pc.Name)
             .NotEmpty().WithMessage(ValidationMessages.NullMessage)
