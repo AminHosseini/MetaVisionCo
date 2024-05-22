@@ -1,6 +1,4 @@
-﻿using Api.Helpers;
-
-namespace Api.Extensions;
+﻿namespace Api.Extensions;
 
 public static class FileHandlerExtension
 {
@@ -20,5 +18,26 @@ public static class FileHandlerExtension
 
         string dbName = Path.Combine(parentSlug, fileName);
         return dbName;
+    }
+
+    public static bool DeleteFile(this string fileName)
+    {
+        try
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath.MainPath, fileName);
+            if (string.IsNullOrWhiteSpace(path))
+                throw new IOException();
+
+            if (File.Exists(path))
+                File.Delete(path);
+            else
+                return false;
+
+            return true;
+        }
+        catch (IOException ioExp)
+        {
+            return false;
+        }
     }
 }

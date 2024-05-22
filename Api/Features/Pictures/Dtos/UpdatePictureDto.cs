@@ -18,10 +18,10 @@ public record class UpdatePictureDto
     /// <summary>
     /// ترتیب نمایش
     /// </summary>
-    public int? DisplayOrder { get; set; }
+    public int DisplayOrder { get; set; }
 
     /// <summary>
     /// دسته بندی محصول RowVersion مقدار
     /// </summary>
-    public RowVersionValue? RowVersion { get; set; }
+    public RowVersionValue RowVersion { get; set; }
 }
