@@ -3,7 +3,7 @@
 /// <summary>
 /// ‍پراپرتی های عکس
 /// </summary>
-public class Picture : BaseEntity, IHaveSoftDelete, IHaveCreationInfo
+public class Picture : BaseEntity, IHaveCreationInfo
 {
     /// <summary>
     /// آیدی صاحب عکس

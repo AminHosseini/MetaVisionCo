@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240521194123_Picture-created")]
+    [Migration("20240522104241_Picture-created")]
     partial class Picturecreated
     {
         /// <inheritdoc />
@@ -72,19 +72,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTimeOffset>("_CreationDate")
                         .HasColumnType("datetimeoffset")
                         .HasComment("تاریخ ساخت");
-
-                    b.Property<DateTimeOffset?>("_DeleteDate")
-                        .HasColumnType("datetimeoffset")
-                        .HasComment("تاریخ حذف");
-
-                    b.Property<long?>("_DeletedByUser")
-                        .HasColumnType("bigint")
-                        .HasComment("کاربر حذف کننده");
-
-                    b.Property<bool>("_IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
 
                     b.Property<byte[]>("_RowVersion")
                         .IsConcurrencyToken()

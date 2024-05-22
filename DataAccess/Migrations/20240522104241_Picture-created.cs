@@ -29,9 +29,6 @@ namespace DataAccess.Migrations
                     PictureType = table.Column<int>(type: "int", nullable: false, defaultValue: 1, comment: "نوع عکس"),
                     _CreatedByUser = table.Column<long>(type: "bigint", nullable: false, comment: "کاربر سازنده"),
                     _CreationDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, comment: "تاریخ ساخت"),
-                    _DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true, comment: "تاریخ حذف"),
-                    _DeletedByUser = table.Column<long>(type: "bigint", nullable: true, comment: "کاربر حذف کننده"),
-                    _IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     _RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false, comment: "بررسی همزمانی")
                 },
                 constraints: table =>

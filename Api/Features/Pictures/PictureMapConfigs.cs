@@ -20,7 +20,6 @@ public static class PictureMapConfigs
             .ForType()
             .Map(dest => dest.PictureId, src => src.Id)
             .Map(dest => dest.PicturePath, src => $"{Path.Combine(Directory.GetCurrentDirectory(), FilePath.MainPath, src.PictureName)}")
-            .Map(dest => dest.IsDeleted, src => EF.Property<bool>(src, ShadowProperty.IsDeleted))
             .Map(dest => dest.RowVersion, src => EF.Property<byte[]>(src, ShadowProperty.RowVersion));
     }
 }

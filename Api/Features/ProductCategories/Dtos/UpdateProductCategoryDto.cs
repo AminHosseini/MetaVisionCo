@@ -5,7 +5,6 @@
 /// </summary>
 public record class UpdateProductCategoryDto : CreateProductCategoryDto
 {
-
     /// <summary>
     /// دسته بندی محصول RowVersion مقدار
     /// </summary>

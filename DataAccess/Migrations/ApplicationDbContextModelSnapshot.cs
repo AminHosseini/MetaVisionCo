@@ -70,19 +70,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("datetimeoffset")
                         .HasComment("تاریخ ساخت");
 
-                    b.Property<DateTimeOffset?>("_DeleteDate")
-                        .HasColumnType("datetimeoffset")
-                        .HasComment("تاریخ حذف");
-
-                    b.Property<long?>("_DeletedByUser")
-                        .HasColumnType("bigint")
-                        .HasComment("کاربر حذف کننده");
-
-                    b.Property<bool>("_IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
                     b.Property<byte[]>("_RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
