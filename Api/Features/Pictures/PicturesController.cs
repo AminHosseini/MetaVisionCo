@@ -6,6 +6,25 @@
 [EnableQueryWithMetadata]
 public class PicturesController : ApiControllerBase
 {
+    #region Queries
+
+    /// <summary>
+    /// یافتن عکس های صاحب عکس
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns>اطلاعات عکس های صاحب عکس</returns>
+    [HttpGet("picture")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<GetPicturesByParentIdDto>))]
+    public Task<IQueryable<GetPicturesByParentIdDto>> GetPicturesByParentIdAsync([Required] long parentId, [Required] PictureType pictureType, CancellationToken cancellationToken)
+    {
+        Queries.GetPictureByParentId.Query query = new() { ParentId = parentId, PictureType = pictureType };
+        return Mediator.Send(query, cancellationToken);
+    }
+
+    #endregion
+
+    #region Commands
+
     /// <summary>
     /// ایجاد عکس
     /// </summary>
@@ -20,4 +39,6 @@ public class PicturesController : ApiControllerBase
         Commands.CreatePicture.Command command = new() { CreatePictureDto = createPictureDto };
         return Mediator.Send(command, cancellationToken);
     }
+
+    #endregion
 }

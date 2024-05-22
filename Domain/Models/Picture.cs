@@ -26,7 +26,7 @@ public class Picture : BaseEntity, IHaveSoftDelete, IHaveCreationInfo
     public required string PictureTitle { get; set; }
 
     /// <summary>
-    /// عکس اصلی است؟
+    /// ترتیب نمایش
     /// </summary>
     public required int DisplayOrder { get; set; }
 

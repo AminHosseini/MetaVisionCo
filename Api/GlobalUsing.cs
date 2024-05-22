@@ -19,3 +19,4 @@ global using Api.Features.ProductCategories.Dtos;
 global using Api.Extensions;
 global using Api.Filters;
 global using Api.Features.Pictures.Dtos;
+global using Api.Helpers;

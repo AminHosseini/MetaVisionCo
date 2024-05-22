@@ -12,10 +12,12 @@ public static class FileHandlerExtension
 
         var fileExtension = new FileInfo(file.FileName).Extension;
         int filesCount = Directory.GetFiles(path).Length;
-        string fileName = $"{Guid.NewGuid()}Axe{filesCount}{fileExtension}";
+        string fileName = $"{Guid.NewGuid()}_Axe{filesCount}{fileExtension}";
+
         string fileNameWithPath = Path.Combine(path, fileName);
         using var stream = new FileStream(fileNameWithPath, FileMode.Create);
         file.CopyTo(stream);
+
         return fileName;
     }
 }
