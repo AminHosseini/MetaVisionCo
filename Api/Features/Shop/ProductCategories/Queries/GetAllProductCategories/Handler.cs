@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories.Queries.GetAllProductCategories;
+﻿namespace Api.Features.Shop.ProductCategories.Queries.GetAllProductCategories;
 
 /// <summary>
 /// کلاس شامل تابع مورد استفاده برای رسیدگی به درخواست استخراج اطلاعات دسته بندی های محصول

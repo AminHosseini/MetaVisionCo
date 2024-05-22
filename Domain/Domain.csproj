@@ -10,4 +10,8 @@
     <PackageReference Include="BaseLib.Domain" Version="1.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\Shop\" />
+  </ItemGroup>
+
 </Project>

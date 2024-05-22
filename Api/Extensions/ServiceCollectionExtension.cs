@@ -1,5 +1,6 @@
 ﻿using Api.Features.Pictures;
-using Api.Features.ProductCategories;
+using Api.Features.Shop.ProductCategories;
+using Domain.Models.Shop;
 using FluentValidation.AspNetCore;
 using MapsterMapper;
 using Microsoft.OData.Edm;

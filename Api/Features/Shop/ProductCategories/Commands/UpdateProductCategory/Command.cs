@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories.Commands.UpdateProductCategory;
+﻿namespace Api.Features.Shop.ProductCategories.Commands.UpdateProductCategory;
 
 /// <summary>
 /// فرمان مورد استفاده برای ویرایش یک دسته بندی محصول

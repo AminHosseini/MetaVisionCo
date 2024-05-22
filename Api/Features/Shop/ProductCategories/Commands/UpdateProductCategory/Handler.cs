@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories.Commands.UpdateProductCategory;
+﻿namespace Api.Features.Shop.ProductCategories.Commands.UpdateProductCategory;
 
 /// <summary>
 /// کلاس شامل تابع مورد استفاده برای رسیدگی به درخواست ویرایش یک دسته بندی محصول

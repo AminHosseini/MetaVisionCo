@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories.Commands.CreateProductCategory;
+﻿namespace Api.Features.Shop.ProductCategories.Commands.CreateProductCategory;
 
 /// <summary>
 /// فرمان مورد استفاده برای ایجاد یک دسته بندی محصول

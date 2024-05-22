@@ -1,9 +1,9 @@
-﻿namespace Api.Features.ProductCategories.Dtos;
+﻿namespace Api.Features.Shop.ProductCategories.Dtos;
 
 /// <summary>
-/// برای گرفتن اطلاعات یک دسته بندی محصول
+/// برای گرفتن اطلاعات دسته بندی های محصول
 /// </summary>
-public readonly record struct GetProductCategoryDto
+public readonly record struct GetAllProductCategoriesDto
 {
     /// <summary>
     /// آیدی دسته بندی محصول
@@ -29,14 +29,4 @@ public readonly record struct GetProductCategoryDto
     /// عنوان
     /// </summary>
     public required string Name { get; init; }
-
-    /// <summary>
-    /// توضیحات
-    /// </summary>
-    public required string Description { get; init; }
-
-    /// <summary>
-    /// ‍پراپرتی های سئو
-    /// </summary>
-    public SeoDto Seo { get; init; }
 }

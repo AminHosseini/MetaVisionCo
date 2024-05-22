@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories.Dtos;
+﻿namespace Api.Features.Shop.ProductCategories.Dtos;
 
 /// <summary>
 /// اطلاعات برای ایجاد یک دسته بندی محصول

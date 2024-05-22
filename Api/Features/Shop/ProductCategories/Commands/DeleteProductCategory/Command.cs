@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories.Commands.DeleteProductCategory;
+﻿namespace Api.Features.Shop.ProductCategories.Commands.DeleteProductCategory;
 
 /// <summary>
 /// فرمان مورد استفاده برای حذف یا برگرداندن دسته بندی محصول

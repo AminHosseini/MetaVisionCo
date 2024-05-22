@@ -23,10 +23,14 @@ public class ApplicationDbContext : DbContext //DbContextCore
         modelBuilder.ApplyAll();
     }
 
+    #region Shop
+
     /// <summary>
     /// دسته بندی های محصول
     /// </summary>
     public required DbSet<ProductCategory> ProductCategories { get; set; } = default!;
+
+    #endregion
 
     /// <summary>
     /// عکس ها

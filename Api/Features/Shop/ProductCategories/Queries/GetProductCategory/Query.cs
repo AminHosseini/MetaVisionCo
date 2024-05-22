@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories.Queries.GetProductCategory;
+﻿namespace Api.Features.Shop.ProductCategories.Queries.GetProductCategory;
 
 /// <summary>
 /// جستار مورد استفاده در استخراج اطلاعات یک دسته بندی محصول

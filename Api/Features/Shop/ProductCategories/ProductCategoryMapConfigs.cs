@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories;
+﻿namespace Api.Features.Shop.ProductCategories;
 
 /// <summary>
 /// تنظیمات نگاشت های دسته بندی محصول

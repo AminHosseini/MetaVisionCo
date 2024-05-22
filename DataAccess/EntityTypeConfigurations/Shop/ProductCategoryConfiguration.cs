@@ -1,4 +1,4 @@
-﻿namespace DataAccess.EntityTypeConfigurations;
+﻿namespace DataAccess.EntityTypeConfigurations.Shop;
 
 /// <summary>
 /// کلاس پیکربندی موجودیت های دسته بندی محصول

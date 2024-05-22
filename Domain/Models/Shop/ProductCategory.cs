@@ -1,4 +1,4 @@
-﻿namespace Domain.Models;
+﻿namespace Domain.Models.Shop;
 
 /// <summary>
 /// دسته بندی محصول

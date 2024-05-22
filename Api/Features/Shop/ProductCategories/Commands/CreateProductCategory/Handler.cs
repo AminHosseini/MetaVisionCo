@@ -1,4 +1,4 @@
-﻿namespace Api.Features.ProductCategories.Commands.CreateProductCategory;
+﻿namespace Api.Features.Shop.ProductCategories.Commands.CreateProductCategory;
 
 /// <summary>
 /// کلاس شامل تابع مورد استفاده برای رسیدگی به درخواست ایجاد یک دسته بندی محصول

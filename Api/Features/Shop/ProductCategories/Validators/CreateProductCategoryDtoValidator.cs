@@ -1,14 +1,14 @@
-﻿namespace Api.Features.ProductCategories.Validators;
+﻿namespace Api.Features.Shop.ProductCategories.Validators;
 
 /// <summary>
-/// کلاس اعتبار سنجی اطلاعات دسته بندی محصول وارد شده توسط کاربر برای ویرایش
+/// کلاس اعتبار سنجی اطلاعات دسته بندی محصول وارد شده توسط کاربر برای ایجاد
 /// </summary>
-public class UpdateProductCategoryDtoValidator : AbstractValidator<UpdateProductCategoryDto>
+public class CreateProductCategoryDtoValidator : AbstractValidator<CreateProductCategoryDto>
 {
     /// <summary>
     /// سازنده کلاس به همراه قوانین اعتبار سنجی
     /// </summary>
-    public UpdateProductCategoryDtoValidator()
+    public CreateProductCategoryDtoValidator()
     {
         //RuleFor(pc => pc.ParentId)
         //    .NotEqual(0).WithMessage(ValidationMessages.NullMessage);
