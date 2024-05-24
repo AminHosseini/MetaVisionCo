@@ -32,10 +32,8 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
             throw new RecordNotFoundException();
 
         var productCategory = await _context.ProductCategories
-            .FirstOrDefaultAsync(pc => pc.Id == request.IdRowVersion.Id, cancellationToken);
-
-        if (productCategory is null)
-            throw new RecordNotFoundException();
+            .FirstOrDefaultAsync(pc => pc.Id == request.IdRowVersion.Id, cancellationToken)
+            ?? throw new RecordNotFoundException();
 
         _context.ProductCategories.Entry(productCategory).SetRowVersionCurrentValue(request.IdRowVersion.RowVersion);
         var isDeleted = _context.ProductCategories.Entry(productCategory).Property<bool>(ShadowProperty.IsDeleted).CurrentValue;

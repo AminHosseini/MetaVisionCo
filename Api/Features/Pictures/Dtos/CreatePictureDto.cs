@@ -8,12 +8,12 @@ public record class CreatePictureDto
     /// <summary>
     /// آیدی صاحب عکس
     /// </summary>
-    public long ParentId { get; set; }
+    public required long ParentId { get; set; }
 
     /// <summary>
     /// نام عکس
     /// </summary>
-    public IFormFile? PictureName { get; set; }
+    public IFormFile? PictureFile { get; set; }
 
     /// <summary>
     /// دگرساز عکس
@@ -28,15 +28,10 @@ public record class CreatePictureDto
     /// <summary>
     /// ترتیب نمایش
     /// </summary>
-    public int DisplayOrder { get; set; }
+    public required int DisplayOrder { get; set; }
 
     /// <summary>
     /// نوع عکس
     /// </summary>
-    public PictureType PictureType { get; set; }
-
-    /// <summary>
-    /// اسلاگ صاحب عکس
-    /// </summary>
-    public string ParentSlug { get; set; } = string.Empty;
+    public required PictureType PictureType { get; set; }
 }

@@ -1,15 +1,12 @@
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
-using Api.Helpers;
 using BaseLib.Application.Extensions;
 //using BaseLib.Context.Interceptors;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.OData;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Options;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

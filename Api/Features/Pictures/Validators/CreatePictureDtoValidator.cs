@@ -10,11 +10,17 @@ public class CreatePictureDtoValidator : AbstractValidator<CreatePictureDto>
     /// </summary>
     public CreatePictureDtoValidator()
     {
-        RuleFor(p => p.PictureName)
-            .NotEmpty().WithMessage(ValidationMessages.NullMessage)
+        RuleFor(p => p.PictureFile)
             .NotNull().WithMessage(ValidationMessages.NullMessage)
-            .Must(x => x!.ContentType.Equals("image/jpeg") || x.ContentType.Equals("image/jpg") || x.ContentType.Equals("image/png"))
-            .WithMessage("فرمت اشتباه");
+            .Must(p => p?.Length < 3000000).WithMessage(ValidationMessages.MaximumFileSize(3))
+            .Must(p => p is not null && (p.ContentType.Equals(FileHelper.Jpeg)
+                || p.ContentType.Equals(FileHelper.Jpg)
+                || p.ContentType.Equals(FileHelper.Png)))
+                .WithMessage(ValidationMessages.AllowedFileFormats("Jpeg, Jpg, Png"));
+
+        RuleFor(p => p.PictureFile!.Length)
+            .ExclusiveBetween(0, 3000000).WithMessage(ValidationMessages.MaximumFileSize(3))
+            .When(p => p is not null && p.PictureFile is not null && p.PictureFile.Length is not 0);
 
         RuleFor(p => p.PictureAlt)
             .NotEmpty().WithMessage(ValidationMessages.NullMessage)

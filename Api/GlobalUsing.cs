@@ -21,3 +21,5 @@ global using Api.Features.Pictures.Dtos;
 global using Api.Helpers;
 global using Api.Features.Shop.ProductCategories.Dtos;
 global using Domain.Models.Shop;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;

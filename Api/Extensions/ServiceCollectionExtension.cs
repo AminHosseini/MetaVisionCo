@@ -1,6 +1,5 @@
 ﻿using Api.Features.Pictures;
 using Api.Features.Shop.ProductCategories;
-using Domain.Models.Shop;
 using FluentValidation.AspNetCore;
 using MapsterMapper;
 using Microsoft.OData.Edm;
@@ -34,7 +33,7 @@ public static class ServiceCollectionExtension
 
     public static IEdmModel GetEdmModel()
     {
-        ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+        var builder = new ODataConventionModelBuilder();
         builder.EntitySet<ProductCategory>("ProductCategory")
             .EntityType
             .Filter()

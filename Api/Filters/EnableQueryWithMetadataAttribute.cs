@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.OData.Query;
 
 namespace Api.Filters;
 
+/// <summary>
+/// و اضافه کردن قابلیت شمارش و نمایش تعداد به آن Odata فعال کردن
+/// </summary>
 public sealed class EnableQueryWithMetadataAttribute : EnableQueryAttribute
 {
     public override void OnActionExecuted(ActionExecutedContext actionExecutedContext)

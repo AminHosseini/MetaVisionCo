@@ -1,8 +1,8 @@
-﻿using System.Text.Json.Serialization;
-using System.Text.Json;
+﻿namespace Api.Helpers;
 
-namespace Api.Helpers;
-
+/// <summary>
+/// RowVersion تغییر دهنده حالت نمایش
+/// </summary>
 public class RowVersionValueConverter : JsonConverter<RowVersionValue>
 {
     private readonly static JsonConverter<RowVersionValue> s_defaultConverter =

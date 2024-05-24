@@ -6,14 +6,14 @@ namespace DataAccess.Contexts;
 /// <summary>
 /// کلاس زمینه پایگاه داده برنامه
 /// </summary>
-public class ApplicationDbContext : DbContext //DbContextCore
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
-    /// <summary>
-    /// سازنده کلاس
-    /// </summary>
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {
-    }
+    ///// <summary>
+    ///// سازنده کلاس
+    ///// </summary>
+    //public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    //{
+    //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,8 +32,12 @@ public class ApplicationDbContext : DbContext //DbContextCore
 
     #endregion
 
+    #region Others
+
     /// <summary>
     /// عکس ها
     /// </summary>
     public required DbSet<Picture> Pictures { get; set; } = default!;
+
+    #endregion
 }

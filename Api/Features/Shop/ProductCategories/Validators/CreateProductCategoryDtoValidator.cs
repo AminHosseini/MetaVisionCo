@@ -30,9 +30,11 @@ public class CreateProductCategoryDtoValidator : AbstractValidator<CreateProduct
             .MaximumLength(200).WithMessage(ValidationMessages.MaximumCharactersMessage(200));
 
         RuleFor(pc => pc.Seo!.Keywords)
-            .NotEmpty().WithMessage(ValidationMessages.NullMessage);
+            .NotEmpty().WithMessage(ValidationMessages.NullMessage)
+            .Must(k => k!.Count() <= 10).WithMessage(ValidationMessages.MaximumListCountMessage(10));
 
         RuleForEach(pc => pc.Seo!.Keywords)
-            .Must(k => !string.IsNullOrWhiteSpace(k)).WithMessage(ValidationMessages.NullMessage);
+            .Must(k => !string.IsNullOrWhiteSpace(k)).WithMessage(ValidationMessages.NullMessage)
+            .Must(k => k.Length <= 25).WithMessage(ValidationMessages.MaximumCharactersForListMembersMessage(25));
     }
 }

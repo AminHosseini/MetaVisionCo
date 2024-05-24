@@ -1,4 +1,6 @@
-﻿namespace Api.Features.Pictures.Commands.DeletePicture;
+﻿using Api.Extensions;
+
+namespace Api.Features.Pictures.Commands.DeletePicture;
 
 /// <summary>
 /// اطلاعات برای حذف عکس
@@ -28,30 +30,21 @@ public class Handler : IRequestHandler<Command, bool>
     /// <returns>آیا عملیات حذف موفق بود؟</returns>
     public async Task<bool> Handle(Command request, CancellationToken cancellationToken)
     {
-        try
-        {
-            if (request is null)
-                throw new RecordNotFoundException();
+        if (request is null)
+            throw new RecordNotFoundException();
 
-            var picture = await _context.Pictures
-                .FirstOrDefaultAsync(p => p.Id == request.IdRowVersion.Id, cancellationToken);
+        var picture = await _context.Pictures
+            .FirstOrDefaultAsync(p => p.Id == request.IdRowVersion.Id, cancellationToken)
+            ?? throw new RecordNotFoundException();
 
-            if (picture is null)
-                throw new RecordNotFoundException();
+        bool result = picture.PictureName.DeletePicture(picture.PictureType, picture.ParentId);
+        if (!result)
+            throw new Exception();
 
-            bool result = picture.PictureName.DeleteFile();
-            if (!result)
-                throw new Exception();
+        _context.Pictures.Attach(picture);
+        _context.Pictures.Remove(picture);
 
-            _context.Pictures.Attach(picture);
-            _context.Pictures.Remove(picture);
-
-            await _context.SaveChangesAsync(cancellationToken);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            return false;
-        }
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
     }
 }

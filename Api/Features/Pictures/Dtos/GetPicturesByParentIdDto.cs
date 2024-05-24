@@ -16,11 +16,6 @@ public readonly record struct GetPicturesByParentIdDto
     public required long PictureId { get; init; }
 
     /// <summary>
-    /// حذف شده؟
-    /// </summary>
-    public required bool IsDeleted { get; init; }
-
-    /// <summary>
     /// عکس RowVersion مقدار
     /// </summary>
     public required RowVersionValue RowVersion { get; init; }

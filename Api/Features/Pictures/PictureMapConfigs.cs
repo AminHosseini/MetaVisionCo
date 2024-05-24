@@ -13,13 +13,13 @@ public static class PictureMapConfigs
         // CreatePictures
         TypeAdapterConfig<CreatePictureDto, Picture>
             .ForType()
-            .Map(dest => dest.PictureName, src => src.PictureName!.HandleFile(src.ParentSlug));
+            .Map(dest => dest.PictureName, src => src.PictureFile!.HandlePicture(src.PictureType, src.ParentId));
 
         // GetPicturesByParentId
         TypeAdapterConfig<Picture, GetPicturesByParentIdDto>
             .ForType()
             .Map(dest => dest.PictureId, src => src.Id)
-            .Map(dest => dest.PicturePath, src => $"{Path.Combine(Directory.GetCurrentDirectory(), FilePath.MainPath, src.PictureName)}")
+            .Map(dest => dest.PicturePath, src => src.PictureName.GetPicture(src.PictureType, src.ParentId))
             .Map(dest => dest.RowVersion, src => EF.Property<byte[]>(src, ShadowProperty.RowVersion));
     }
 }
