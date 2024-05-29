@@ -31,10 +31,10 @@ public class UpdateProductCategoryDtoValidator : AbstractValidator<UpdateProduct
 
         RuleFor(pc => pc.Seo!.Keywords)
             .NotEmpty().WithMessage(ValidationMessages.NullMessage)
-            .Must(k => k!.Count() <= 10).WithMessage(ValidationMessages.MaximumListCountMessage(10));
+            .Must(k => k!.Count() <= 8).WithMessage(ValidationMessages.MaximumListCountMessage(8));
 
         RuleForEach(pc => pc.Seo!.Keywords)
             .Must(k => !string.IsNullOrWhiteSpace(k)).WithMessage(ValidationMessages.NullMessage)
-            .Must(k => k.Length <= 25).WithMessage(ValidationMessages.MaximumCharactersForListMembersMessage(25));
+            .Must(k => k.Length <= 24).WithMessage(ValidationMessages.MaximumCharactersForListMembersMessage(24));
     }
 }
