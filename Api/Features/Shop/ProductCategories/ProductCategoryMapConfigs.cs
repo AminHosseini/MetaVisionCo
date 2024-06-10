@@ -27,6 +27,7 @@ public static class ProductCategoryMapConfigs
         TypeAdapterConfig<ProductCategory, GetProductCategoryDto>
             .ForType()
             .Map(dest => dest.ProductCategoryId, src => src.Id)
+            .Map(dest => dest.ParentId, src => src.ParentId == null ? 0 : src.ParentId)
             .Map(dest => dest.Seo.Keywords, src => src.Seo.Keywords.ListHashtags())
             .Map(dest => dest.IsDeleted, src => EF.Property<bool>(src, ShadowProperty.IsDeleted))
             .Map(dest => dest.RowVersion, src => EF.Property<byte[]>(src, ShadowProperty.RowVersion));
