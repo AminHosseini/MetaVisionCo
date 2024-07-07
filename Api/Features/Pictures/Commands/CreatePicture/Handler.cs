@@ -36,6 +36,10 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
         // This 1 must later be replaced by a real user
         _context.Pictures.Entry(picture).SetCurrentValue(ShadowProperty.CreatedByUser, (long)1);
 
+        int count = _context.Pictures.AsNoTracking()
+            .Where(p => p.ParentId == picture.ParentId && p.PictureType == picture.PictureType).Count();
+        picture.DisplayOrder = count + 1;
+
         await _context.Pictures.AddAsync(picture, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 

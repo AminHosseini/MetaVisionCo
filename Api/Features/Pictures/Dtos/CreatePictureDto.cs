@@ -25,10 +25,10 @@ public record class CreatePictureDto
     /// </summary>
     public string? PictureTitle { get; set; } = string.Empty;
 
-    /// <summary>
-    /// ترتیب نمایش
-    /// </summary>
-    public required int DisplayOrder { get; set; }
+    ///// <summary>
+    ///// ترتیب نمایش
+    ///// </summary>
+    //public required int DisplayOrder { get; set; }
 
     /// <summary>
     /// نوع عکس
