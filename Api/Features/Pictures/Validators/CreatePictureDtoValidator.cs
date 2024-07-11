@@ -24,10 +24,12 @@ public class CreatePictureDtoValidator : AbstractValidator<CreatePictureDto>
 
         RuleFor(p => p.PictureAlt)
             .NotEmpty().WithMessage(ValidationMessages.NullMessage)
+            .NotEqual("null").WithMessage(ValidationMessages.NullMessage)
             .MaximumLength(200).WithMessage(ValidationMessages.MaximumCharactersMessage(200));
 
         RuleFor(p => p.PictureTitle)
             .NotEmpty().WithMessage(ValidationMessages.NullMessage)
+            .NotEqual("null").WithMessage(ValidationMessages.NullMessage)
             .MaximumLength(200).WithMessage(ValidationMessages.MaximumCharactersMessage(200));
     }
 }
