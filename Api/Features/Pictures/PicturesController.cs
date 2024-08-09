@@ -15,7 +15,7 @@ public class PicturesController : ApiControllerBase
     /// <param name="pictureType">نوع صاحب عکس</param>
     /// <param name="cancellationToken"></param>
     /// <returns>اطلاعات عکس های صاحب عکس</returns>
-    [HttpGet("picture")]
+    [HttpGet("pictures")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<GetPicturesByParentIdDto>))]
     public Task<IQueryable<GetPicturesByParentIdDto>> GetPicturesByParentIdAsync([Required] long parentId, [Required] PictureType pictureType, CancellationToken cancellationToken)
     {

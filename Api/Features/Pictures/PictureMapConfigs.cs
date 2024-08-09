@@ -19,7 +19,7 @@ public static class PictureMapConfigs
         TypeAdapterConfig<Picture, GetPicturesByParentIdDto>
             .ForType()
             .Map(dest => dest.PictureId, src => src.Id)
-            .Map(dest => dest.PicturePath, src => src.PictureName.GetPicture(src.PictureType, src.ParentId))
+            .Map(dest => dest.PictureInfo, src => src.PictureName.GetPicture(src.PictureType, src.ParentId))
             .Map(dest => dest.RowVersion, src => EF.Property<byte[]>(src, ShadowProperty.RowVersion));
     }
 }

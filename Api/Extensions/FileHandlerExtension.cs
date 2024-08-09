@@ -1,6 +1,4 @@
-﻿using Domain.Enums;
-
-namespace Api.Extensions;
+﻿namespace Api.Extensions;
 
 /// <summary>
 /// کلاس کار با فایل ها
@@ -22,7 +20,7 @@ public static class FileHandlerExtension
 
         string fileExtension = new FileInfo(picture.FileName).Extension;
         int filesCount = Directory.GetFiles(path).Length;
-        string fileName = $"_{Guid.NewGuid()}_Axe{filesCount}{fileExtension}";
+        string fileName = $"_{Guid.NewGuid()}_Axe_{filesCount}{fileExtension}";
 
         string fileNameWithPath = Path.Combine(path, fileName);
         using var stream = new FileStream(fileNameWithPath, FileMode.Create);
@@ -38,12 +36,11 @@ public static class FileHandlerExtension
     /// <param name="pictureType">نوع عکس</param>
     /// <param name="parentId">آیدی صاحب عکس</param>
     /// <returns>آیا عملیات حذف موفق بود؟</returns>
-    /// <exception cref="FileNotFoundException"></exception>
     public static bool DeletePicture(this string pictureName, PictureType pictureType, long parentId)
     {
         string path = CreatePicturePath(pictureType, parentId);
         if (string.IsNullOrWhiteSpace(path))
-            throw new FileNotFoundException();
+            throw new RecordNotFoundException();
 
         var picturePath = Path.Combine(path, pictureName);
         if (File.Exists(picturePath))
@@ -62,14 +59,18 @@ public static class FileHandlerExtension
     /// <param name="pictureType">نوع عکس</param>
     /// <param name="parentId">آیدی صاحب عکس</param>
     /// <returns>آدرس عکس</returns>
-    /// <exception cref="FileNotFoundException"></exception>
-    public static string GetPicture(this string pictureName, PictureType pictureType, long parentId)
+    public static PictureInfoDto GetPicture(this string pictureName, PictureType pictureType, long parentId)
     {
         string path = CreatePicturePath(pictureType, parentId);
         if (string.IsNullOrWhiteSpace(path))
-            throw new FileNotFoundException();
+            throw new RecordNotFoundException();
 
-        return Path.Combine(path, pictureName);
+        path = Path.Combine(path, pictureName);
+        if (!File.Exists(path))
+            throw new RecordNotFoundException();
+
+        using FileStream stream = File.OpenRead(path);
+        return new PictureInfoDto() { PictureName = pictureName, PicturePath = path, PictureSize = stream.Length };
     }
 
     /// <summary>
@@ -78,17 +79,16 @@ public static class FileHandlerExtension
     /// <param name="pictureType">نوع عکس</param>
     /// <param name="parentId">آیدی صاحب عکس</param>
     /// <returns>آدرس محل ذخیره عکس</returns>
-    /// <exception cref="FileNotFoundException"></exception>
     private static string CreatePicturePath(PictureType pictureType, long parentId)
     {
         if (parentId == 0)
-            throw new FileNotFoundException();
+            throw new RecordNotFoundException();
 
         string pctureTypePath = EnumExtension.GetEnumDescriptions(typeof(PictureType))
-            .FirstOrDefault(x => x.Id == (int)pictureType).Description
-            ?? throw new FileNotFoundException();
+            .FirstOrDefault(x => x.Id == (int)pictureType).Name//Description
+            ?? throw new RecordNotFoundException();
 
-        string mainFolder = $"{pctureTypePath} با آیدی {parentId}";
+        string mainFolder = $"{pctureTypePath}_With_Id_{parentId}";
         return Path.Combine(Directory.GetCurrentDirectory(), FileHelper.MainPath, pctureTypePath, mainFolder);
     }
 }

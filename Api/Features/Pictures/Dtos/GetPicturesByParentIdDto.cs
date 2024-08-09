@@ -5,10 +5,10 @@
 /// </summary>
 public readonly record struct GetPicturesByParentIdDto
 {
-    /// <summary>
-    /// آیدی صاحب عکس
-    /// </summary>
-    public required long ParentId { get; init; }
+    ///// <summary>
+    ///// آیدی صاحب عکس
+    ///// </summary>
+    //public required long ParentId { get; init; }
 
     /// <summary>
     /// آیدی عکس
@@ -21,9 +21,9 @@ public readonly record struct GetPicturesByParentIdDto
     public required RowVersionValue RowVersion { get; init; }
 
     /// <summary>
-    /// آدرس عکس
+    /// اطلاعات عکس
     /// </summary>
-    public required string PicturePath { get; init; }
+    public required PictureInfoDto PictureInfo { get; init; }
 
     /// <summary>
     /// آلت عکس برای سئو
@@ -40,8 +40,8 @@ public readonly record struct GetPicturesByParentIdDto
     /// </summary>
     public required int DisplayOrder { get; init; }
 
-    /// <summary>
-    /// نوع صاحب عکس
-    /// </summary>
-    public required PictureType PictureType { get; init; }
+    ///// <summary>
+    ///// نوع صاحب عکس
+    ///// </summary>
+    //public required PictureType PictureType { get; init; }
 }
