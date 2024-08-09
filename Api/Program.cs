@@ -6,6 +6,7 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.OData;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Options;
+using Microsoft.Extensions.FileProviders;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -162,5 +163,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors();
+
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Assets")),
+    RequestPath = new PathString("/Assets")
+});
 
 app.Run();

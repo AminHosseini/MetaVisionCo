@@ -15,6 +15,8 @@ public static class FileHandlerExtension
     public static string HandlePicture(this IFormFile picture, PictureType pictureType, long parentId)
     {
         string path = CreatePicturePath(pictureType, parentId);
+        path = Path.Combine(Directory.GetCurrentDirectory(), path);
+
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
 
@@ -39,6 +41,8 @@ public static class FileHandlerExtension
     public static bool DeletePicture(this string pictureName, PictureType pictureType, long parentId)
     {
         string path = CreatePicturePath(pictureType, parentId);
+        path = Path.Combine(Directory.GetCurrentDirectory(), path);
+
         if (string.IsNullOrWhiteSpace(path))
             throw new RecordNotFoundException();
 
@@ -62,14 +66,18 @@ public static class FileHandlerExtension
     public static PictureInfoDto GetPicture(this string pictureName, PictureType pictureType, long parentId)
     {
         string path = CreatePicturePath(pictureType, parentId);
-        if (string.IsNullOrWhiteSpace(path))
+        var localPath = Path.Combine(Directory.GetCurrentDirectory(), path);
+
+        if (string.IsNullOrWhiteSpace(localPath))
             throw new RecordNotFoundException();
 
-        path = Path.Combine(path, pictureName);
-        if (!File.Exists(path))
+        localPath = Path.Combine(localPath, pictureName);
+        if (!File.Exists(localPath))
             throw new RecordNotFoundException();
 
-        using FileStream stream = File.OpenRead(path);
+        using FileStream stream = File.OpenRead(localPath);
+
+        path = Path.Combine("https://localhost:7191", path, pictureName);
         return new PictureInfoDto() { PictureName = pictureName, PicturePath = path, PictureSize = stream.Length };
     }
 
@@ -89,6 +97,7 @@ public static class FileHandlerExtension
             ?? throw new RecordNotFoundException();
 
         string mainFolder = $"{pctureTypePath}_With_Id_{parentId}";
-        return Path.Combine(Directory.GetCurrentDirectory(), FileHelper.MainPath, pctureTypePath, mainFolder);
+        //return Path.Combine(Directory.GetCurrentDirectory(), FileHelper.MainPath, pctureTypePath, mainFolder);
+        return Path.Combine(FileHelper.MainPath, pctureTypePath, mainFolder);
     }
 }

@@ -37,9 +37,6 @@ public class Handler : IRequestHandler<Query, IQueryable<GetPicturesByParentIdDt
         //if (!query.Any())
         //    throw new RecordNotFoundException();
 
-        
-        
-        
         return Task.FromResult(query.ProjectToType<GetPicturesByParentIdDto>());
     }
 }
