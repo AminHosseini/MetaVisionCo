@@ -1,19 +1,14 @@
 ﻿namespace Api.Features.Pictures.Dtos;
 
 /// <summary>
-/// اطلاعات برای ویرایش یک دسته بندی محصول
+/// اطلاعات برای ویرایش ترتیب نمایش عکس ها
 /// </summary>
-public record class UpdatePictureDto
+public record class ChangePicturesOrderDto
 {
     /// <summary>
-    /// آلت عکس برای سئو
+    /// آیدی عکس
     /// </summary>
-    public string? PictureAlt { get; set; }
-
-    /// <summary>
-    /// عنوان عکس برای سئو
-    /// </summary>
-    public string? PictureTitle { get; set; }
+    public required long PictureId { get; set; }
 
     /// <summary>
     /// ترتیب نمایش
@@ -21,12 +16,12 @@ public record class UpdatePictureDto
     public required int DisplayOrder { get; set; }
 
     /// <summary>
-    /// نوع عکس
+    /// نوع صاحب عکس
     /// </summary>
     public required PictureType PictureType { get; set; }
 
     /// <summary>
-    /// دسته بندی محصول RowVersion مقدار
+    /// عکس RowVersion مقدار
     /// </summary>
     public required RowVersionValue RowVersion { get; set; }
 }

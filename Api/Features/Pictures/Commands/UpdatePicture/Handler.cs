@@ -32,7 +32,7 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
             throw new RecordNotFoundException();
 
         var picture = await _context.Pictures
-            .FirstOrDefaultAsync(pc => pc.Id == request.PictureId, cancellationToken)
+            .FirstOrDefaultAsync(p => p.Id == request.PictureId && p.PictureType == request.UpdatePictureDto.PictureType, cancellationToken)
             ?? throw new RecordNotFoundException();
 
         _context.Pictures.Entry(picture).SetRowVersionCurrentValue(request.UpdatePictureDto.RowVersion);

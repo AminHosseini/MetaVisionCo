@@ -59,6 +59,21 @@ public class PicturesController : ApiControllerBase
     }
 
     /// <summary>
+    /// ویرایش ترتیب نمایش عکس ها
+    /// </summary>
+    /// <param name="changePicturesOrders">اطلاعات برای ویرایش ترتیب نمایش عکس ها</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>عکس های ویرایش شده RowVersion لیستی از آیدی و</returns>
+    [HttpPut("pictures/order")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<IdRowVersionGet>))]
+    [Consumes("application/json")]
+    public Task<IEnumerable<IdRowVersionGet>> ChangePicturesOrderAsync([FromBody][Required] IEnumerable<ChangePicturesOrderDto> changePicturesOrders, CancellationToken cancellationToken)
+    {
+        Commands.ChangePicturesOrder.Command command = new() { ChangePicturesOrderDtos = changePicturesOrders };
+        return Mediator.Send(command, cancellationToken);
+    }
+
+    /// <summary>
     /// عکس را حذف میکند
     /// </summary>
     /// <param name="idRowVersion">اطلاعات عکس که قرار است حذف شود</param>
