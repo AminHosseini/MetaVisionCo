@@ -49,10 +49,10 @@ public class PicturesController : ApiControllerBase
     /// <param name="updatePicture">اطلاعات عکس برای ویرایش</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Updated Id And RowVersion</returns>
-    [HttpPut("picture/{objectId:long:min(1)}")]
+    [HttpPut("pictures/{objectId:long:min(1)}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("application/json")]
-    public Task<IdRowVersionGet> UpdatePictureAsync(long objectId, [Required] UpdatePictureDto updatePicture, CancellationToken cancellationToken)
+    public Task<IdRowVersionGet> UpdatePictureAsync([FromRoute][Required] long objectId, [FromBody][Required] UpdatePictureDto updatePicture, CancellationToken cancellationToken)
     {
         Commands.UpdatePicture.Command command = new() { PictureId = objectId, UpdatePictureDto = updatePicture };
         return Mediator.Send(command, cancellationToken);

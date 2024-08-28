@@ -15,15 +15,15 @@ public record class UpdatePictureDto
     /// </summary>
     public string? PictureTitle { get; set; }
 
-    /// <summary>
-    /// ترتیب نمایش
-    /// </summary>
-    public required int DisplayOrder { get; set; }
+    ///// <summary>
+    ///// ترتیب نمایش
+    ///// </summary>
+    //public required int DisplayOrder { get; set; }
 
-    /// <summary>
-    /// نوع عکس
-    /// </summary>
-    public required PictureType PictureType { get; set; }
+    ///// <summary>
+    ///// نوع عکس
+    ///// </summary>
+    //public required PictureType PictureType { get; set; }
 
     /// <summary>
     /// دسته بندی محصول RowVersion مقدار

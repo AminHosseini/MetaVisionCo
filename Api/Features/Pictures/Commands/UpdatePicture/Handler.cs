@@ -31,21 +31,22 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
         if (request is null)
             throw new RecordNotFoundException();
 
-        var picture = await _context.Pictures
-            .FirstOrDefaultAsync(p => p.Id == request.PictureId && p.PictureType == request.UpdatePictureDto.PictureType, cancellationToken)
-            ?? throw new RecordNotFoundException();
+        //var picture = await _context.Pictures
+        //    .FirstOrDefaultAsync(p => p.Id == request.PictureId && p.PictureType == request.UpdatePictureDto.PictureType, cancellationToken)
+        //    ?? throw new RecordNotFoundException();
 
+        var picture = new Picture(request.PictureId);
         _context.Pictures.Entry(picture).SetRowVersionCurrentValue(request.UpdatePictureDto.RowVersion);
 
         picture.PictureAlt = request.UpdatePictureDto.PictureAlt!;
         picture.PictureTitle = request.UpdatePictureDto.PictureTitle!;
-        picture.DisplayOrder = request.UpdatePictureDto.DisplayOrder;
+        //picture.DisplayOrder = request.UpdatePictureDto.DisplayOrder;
 
         _context.Pictures.Attach(picture);
 
         _context.Pictures.Entry(picture).Property(p => p.PictureAlt).IsModified = true;
         _context.Pictures.Entry(picture).Property(p => p.PictureTitle).IsModified = true;
-        _context.Pictures.Entry(picture).Property(p => p.DisplayOrder).IsModified = true;
+        //_context.Pictures.Entry(picture).Property(p => p.DisplayOrder).IsModified = true;
 
         await _context.SaveChangesAsync(cancellationToken);
 

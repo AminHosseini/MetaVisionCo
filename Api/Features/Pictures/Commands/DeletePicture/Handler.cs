@@ -1,6 +1,4 @@
-﻿using Api.Extensions;
-
-namespace Api.Features.Pictures.Commands.DeletePicture;
+﻿namespace Api.Features.Pictures.Commands.DeletePicture;
 
 /// <summary>
 /// اطلاعات برای حذف عکس
@@ -36,6 +34,8 @@ public class Handler : IRequestHandler<Command, bool>
         var picture = await _context.Pictures
             .FirstOrDefaultAsync(p => p.Id == request.IdRowVersion.Id, cancellationToken)
             ?? throw new RecordNotFoundException();
+
+        //var picture = new Picture(request.IdRowVersion.Id);
 
         bool result = picture.PictureName.DeletePicture(picture.PictureType, picture.ParentId);
         if (!result)
