@@ -8,7 +8,7 @@ public static class ProductCategoryMapConfigs
     /// <summary>
     /// ثبت پیکربندی نگاشت ها
     /// </summary>
-    public static void RegisterMappingConfigurations(this IServiceCollection services)
+    public static void RegisterMappingConfigurations(this IServiceCollection services/*, ApplicationDbContext context*/)
     {
         // CreateProductCategory
         TypeAdapterConfig<CreateProductCategoryDto, ProductCategory>
@@ -21,6 +21,7 @@ public static class ProductCategoryMapConfigs
         TypeAdapterConfig<UpdateProductCategoryDto, ProductCategory>
             .ForType()
             .Map(dest => dest.Seo.Slug, src => src.Seo!.Slug!.Slugify())
+            .Map(dest => dest.Seo.MetaDescription, src => src.Seo!.MetaDescription!.Slugify())
             .Map(dest => dest.Seo.Keywords, src => src.Seo!.Keywords.Hashtagify());
 
         // GetProductCategory

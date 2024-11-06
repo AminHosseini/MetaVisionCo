@@ -31,6 +31,9 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
         if (request is null)
             throw new RecordNotFoundException();
 
+        //var productCategory = new ProductCategory(request.IdRowVersion.Id);
+        //var isDeleted = EF.Property<bool>(productCategory, ShadowProperty.IsDeleted);
+
         var productCategory = await _context.ProductCategories
             .FirstOrDefaultAsync(pc => pc.Id == request.IdRowVersion.Id, cancellationToken)
             ?? throw new RecordNotFoundException();

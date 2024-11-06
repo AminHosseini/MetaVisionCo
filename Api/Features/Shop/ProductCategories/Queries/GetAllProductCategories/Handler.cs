@@ -36,6 +36,15 @@ public class Handler : IRequestHandler<Query, IQueryable<GetAllProductCategories
         //if (!query.Any())
         //    throw new RecordNotFoundException();
 
-        return Task.FromResult(query.ProjectToType<GetAllProductCategoriesDto>());
+        var data = query.ProjectToType<GetAllProductCategoriesDto>();
+
+        var list = new List<GetAllProductCategoriesDto>();
+        foreach (var item in data.Where(pc => pc.ParentId == null))
+        {
+            item.Children = data.Where(pc => pc.ParentId == item.ProductCategoryId);
+            list.Add(item);
+        }
+
+        return Task.FromResult(list.AsQueryable());
     }
 }
