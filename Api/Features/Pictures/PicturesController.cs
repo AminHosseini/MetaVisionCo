@@ -17,7 +17,7 @@ public class PicturesController : ApiControllerBase
     /// <returns>اطلاعات عکس های صاحب عکس</returns>
     [HttpGet("pictures")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<GetPicturesByParentIdDto>))]
-    public Task<IQueryable<GetPicturesByParentIdDto>> GetPicturesByParentIdAsync([Required] long parentId, [Required] PictureType pictureType, CancellationToken cancellationToken)
+    public Task<IQueryable<GetPicturesByParentIdDto>> GetPicturesByParentIdAsync([Required][FromQuery] long parentId, [Required][FromQuery] PictureType pictureType, CancellationToken cancellationToken)
     {
         Queries.GetPictureByParentId.Query query = new() { ParentId = parentId, PictureType = pictureType };
         return Mediator.Send(query, cancellationToken);
@@ -36,7 +36,7 @@ public class PicturesController : ApiControllerBase
     [HttpPost("pictures")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("multipart/form-data")]
-    public Task<IdRowVersionGet> CreatePictureAsync([FromForm][Required] CreatePictureDto createPictureDto, CancellationToken cancellationToken)
+    public Task<IdRowVersionGet> CreatePictureAsync([Required][FromForm] CreatePictureDto createPictureDto, CancellationToken cancellationToken)
     {
         Commands.CreatePicture.Command command = new() { CreatePictureDto = createPictureDto };
         return Mediator.Send(command, cancellationToken);
@@ -52,7 +52,7 @@ public class PicturesController : ApiControllerBase
     [HttpPut("pictures/{objectId:long:min(1)}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("application/json")]
-    public Task<IdRowVersionGet> UpdatePictureAsync([FromRoute][Required] long objectId, [FromBody][Required] UpdatePictureDto updatePicture, CancellationToken cancellationToken)
+    public Task<IdRowVersionGet> UpdatePictureAsync([Required][FromRoute] long objectId, [Required][FromBody] UpdatePictureDto updatePicture, CancellationToken cancellationToken)
     {
         Commands.UpdatePicture.Command command = new() { PictureId = objectId, UpdatePictureDto = updatePicture };
         return Mediator.Send(command, cancellationToken);
@@ -67,7 +67,7 @@ public class PicturesController : ApiControllerBase
     [HttpPut("pictures/order")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<IdRowVersionGet>))]
     [Consumes("application/json")]
-    public Task<IEnumerable<IdRowVersionGet>> ChangePicturesOrderAsync([FromBody][Required] IEnumerable<ChangePicturesOrderDto> changePicturesOrders, CancellationToken cancellationToken)
+    public Task<IEnumerable<IdRowVersionGet>> ChangePicturesOrderAsync([Required][FromBody] IEnumerable<ChangePicturesOrderDto> changePicturesOrders, CancellationToken cancellationToken)
     {
         Commands.ChangePicturesOrder.Command command = new() { ChangePicturesOrderDtos = changePicturesOrders };
         return Mediator.Send(command, cancellationToken);
@@ -82,7 +82,7 @@ public class PicturesController : ApiControllerBase
     [HttpPatch("pictures")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [Consumes("application/json")]
-    public Task<bool> DeletePictureAsync([FromBody][Required] IdRowVersion idRowVersion, CancellationToken cancellationToken)
+    public Task<bool> DeletePictureAsync([Required][FromBody] IdRowVersion idRowVersion, CancellationToken cancellationToken)
     {
         Commands.DeletePicture.Command command = new() { IdRowVersion = idRowVersion };
         return Mediator.Send(command, cancellationToken);

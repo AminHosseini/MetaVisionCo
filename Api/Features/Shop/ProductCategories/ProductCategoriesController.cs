@@ -16,7 +16,7 @@ public class ProductCategoriesController : ApiControllerBase
     /// <returns>اطلاعات یک دسته بندی محصول</returns>
     [HttpGet("product-categories/{objectId:long:min(1)}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetProductCategoryDto))]
-    public Task<GetProductCategoryDto> GetProductCategoryAsync([Required] long objectId, CancellationToken cancellationToken)
+    public Task<GetProductCategoryDto> GetProductCategoryAsync([Required][FromRoute] long objectId, CancellationToken cancellationToken)
     {
         Queries.GetProductCategory.Query query = new() { ProductCategoryId = objectId };
         return Mediator.Send(query, cancellationToken);
@@ -48,7 +48,7 @@ public class ProductCategoriesController : ApiControllerBase
     [HttpPost("product-categories")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("application/json")]
-    public Task<IdRowVersionGet> CreateProductCategoryAsync([Required] CreateProductCategoryDto createProductCategory, CancellationToken cancellationToken)
+    public Task<IdRowVersionGet> CreateProductCategoryAsync([Required][FromBody] CreateProductCategoryDto createProductCategory, CancellationToken cancellationToken)
     {
         Commands.CreateProductCategory.Command command = new() { CreateProductCategoryDto = createProductCategory };
         return Mediator.Send(command, cancellationToken);
@@ -64,7 +64,7 @@ public class ProductCategoriesController : ApiControllerBase
     [HttpPut("product-categories/{objectId:long:min(1)}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("application/json")]
-    public Task<IdRowVersionGet> UpdateProductCategoryAsync(long objectId, [Required] UpdateProductCategoryDto updateProductCategory, CancellationToken cancellationToken)
+    public Task<IdRowVersionGet> UpdateProductCategoryAsync([Required][FromRoute] long objectId, [Required][FromBody] UpdateProductCategoryDto updateProductCategory, CancellationToken cancellationToken)
     {
         Commands.UpdateProductCategory.Command command = new() { ProductCategoryId = objectId, UpdateProductCategoryDto = updateProductCategory };
         return Mediator.Send(command, cancellationToken);
@@ -79,7 +79,7 @@ public class ProductCategoriesController : ApiControllerBase
     [HttpPatch("product-categories")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
     [Consumes("application/json")]
-    public Task<IdRowVersionGet> DeleteProductCategoryAsync([FromBody][Required] IdRowVersion idRowVersion, CancellationToken cancellationToken)
+    public Task<IdRowVersionGet> DeleteProductCategoryAsync([Required][FromBody] IdRowVersion idRowVersion, CancellationToken cancellationToken)
     {
         Commands.DeleteProductCategory.Command command = new() { IdRowVersion = idRowVersion };
         return Mediator.Send(command, cancellationToken);
