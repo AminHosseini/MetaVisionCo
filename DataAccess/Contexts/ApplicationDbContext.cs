@@ -30,6 +30,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     /// </summary>
     public required DbSet<ProductCategory> ProductCategories { get; set; } = default!;
 
+    /// <summary>
+    /// محصول ها
+    /// </summary>
+    public required DbSet<Product> Products { get; set; } = default!;
+
     #endregion
 
     #region Others

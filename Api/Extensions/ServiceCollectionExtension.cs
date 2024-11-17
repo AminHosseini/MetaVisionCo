@@ -1,5 +1,6 @@
 ﻿using Api.Features.Pictures;
 using Api.Features.Shop.ProductCategories;
+using Api.Features.Shop.Products;
 using FluentValidation.AspNetCore;
 using MapsterMapper;
 using Microsoft.OData.Edm;
@@ -27,6 +28,7 @@ public static class ServiceCollectionExtension
     {
         ProductCategoryMapConfigs.RegisterMappingConfigurations(services);
         PictureMapConfigs.RegisterMappingConfigurations(services);
+        ProductMapConfigs.RegisterMappingConfigurations(services);
 
         return services;
     }
