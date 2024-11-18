@@ -35,10 +35,6 @@
 
 	<ItemGroup>
 		<Folder Include="Assets\" />
-		<Folder Include="Features\Shop\Products\Dtos\" />
-		<Folder Include="Features\Shop\Products\Commands\" />
-		<Folder Include="Features\Shop\Products\Validators\" />
-		<Folder Include="Features\Shop\Products\Queries\" />
 	</ItemGroup>
 
 </Project>

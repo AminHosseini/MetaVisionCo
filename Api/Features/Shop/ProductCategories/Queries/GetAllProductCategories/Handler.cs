@@ -31,20 +31,30 @@ public class Handler : IRequestHandler<Query, IQueryable<GetAllProductCategories
         if (request is null)
             throw new RecordNotFoundException();
 
+        //var query = _context.ProductCategories.AsNoTracking();
+
+        ////if (!query.Any())
+        ////    throw new RecordNotFoundException();
+
+        //var data = query.ProjectToType<GetAllProductCategoriesDto>();
+
+        //var list = new List<GetAllProductCategoriesDto>();
+        //foreach (var item in data.Where(pc => pc.ParentId == null))
+        //{
+        //    item.Children = data.Where(pc => pc.ParentId == item.ProductCategoryId);
+        //    list.Add(item);
+        //}
+
+        //return Task.FromResult(list.AsQueryable());
+
         var query = _context.ProductCategories.AsNoTracking();
+        var groupedQuery = query.Where(pc => pc.ParentId == null)
+            .GroupJoin(
+                query.Where(pc => pc.ParentId != null),
+                p => p.Id,
+                c => c.ParentId,
+                (p, c) => new GetAllProductCategoriesMappingHelperDto { Parent = p, Children = c });
 
-        //if (!query.Any())
-        //    throw new RecordNotFoundException();
-
-        var data = query.ProjectToType<GetAllProductCategoriesDto>();
-
-        var list = new List<GetAllProductCategoriesDto>();
-        foreach (var item in data.Where(pc => pc.ParentId == null))
-        {
-            item.Children = data.Where(pc => pc.ParentId == item.ProductCategoryId);
-            list.Add(item);
-        }
-
-        return Task.FromResult(list.AsQueryable());
+        return Task.FromResult(groupedQuery.ProjectToType<GetAllProductCategoriesDto>());
     }
 }

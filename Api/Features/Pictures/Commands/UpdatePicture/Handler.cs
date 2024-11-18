@@ -35,13 +35,14 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
         //    .FirstOrDefaultAsync(p => p.Id == request.PictureId && p.PictureType == request.UpdatePictureDto.PictureType, cancellationToken)
         //    ?? throw new RecordNotFoundException();
 
-        var picture = new Picture(request.PictureId);
-        _context.Pictures.Entry(picture).SetRowVersionCurrentValue(request.UpdatePictureDto.RowVersion);
+        var picture = request.UpdatePictureDto.Adapt<Picture>();
+        picture.Id = request.PictureId;
 
-        picture.PictureAlt = request.UpdatePictureDto.PictureAlt!;
-        picture.PictureTitle = request.UpdatePictureDto.PictureTitle!;
+        //picture.PictureAlt = request.UpdatePictureDto.PictureAlt!;
+        //picture.PictureTitle = request.UpdatePictureDto.PictureTitle!;
         //picture.DisplayOrder = request.UpdatePictureDto.DisplayOrder;
 
+        _context.Pictures.Entry(picture).SetRowVersionCurrentValue(request.UpdatePictureDto.RowVersion);
         _context.Pictures.Attach(picture);
 
         _context.Pictures.Entry(picture).Property(p => p.PictureAlt).IsModified = true;

@@ -34,6 +34,14 @@ public static class ProductCategoryMapConfigs
             .Map(dest => dest.RowVersion, src => EF.Property<byte[]>(src, ShadowProperty.RowVersion));
 
         // GetAllProductCategories
+        TypeAdapterConfig<GetAllProductCategoriesMappingHelperDto, GetAllProductCategoriesDto>
+            .ForType()
+            .Map(dest => dest.ProductCategoryId, src => src.Parent.Id)
+            .Map(dest => dest.ParentId, src => src.Parent.ParentId)
+            .Map(dest => dest.Name, src => src.Parent.Name)
+            .Map(dest => dest.IsDeleted, src => EF.Property<bool>(src.Parent, ShadowProperty.IsDeleted))
+            .Map(dest => dest.RowVersion, src => EF.Property<byte[]>(src.Parent, ShadowProperty.RowVersion));
+
         TypeAdapterConfig<ProductCategory, GetAllProductCategoriesDto>
             .ForType()
             .Map(dest => dest.ProductCategoryId, src => src.Id)

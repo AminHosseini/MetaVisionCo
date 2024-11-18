@@ -3,12 +3,22 @@
 /// <summary>
 /// برای گرفتن اطلاعات دسته بندی های محصول
 /// </summary>
-public class GetAllProductCategoriesDto
+public record class GetAllProductCategoriesDto
 {
     /// <summary>
     /// آیدی دسته بندی محصول
     /// </summary>
     public required long ProductCategoryId { get; set; }
+
+    /// <summary>
+    /// آیدی دسته بندی اصلی محصول
+    /// </summary>
+    public long? ParentId { get; set; }
+
+    /// <summary>
+    /// عنوان
+    /// </summary>
+    public required string Name { get; set; }
 
     /// <summary>
     /// حذف شده؟
@@ -21,19 +31,7 @@ public class GetAllProductCategoriesDto
     public required RowVersionValue RowVersion { get; set; }
 
     /// <summary>
-    /// آیدی دسته بندی اصلی محصول
-    /// </summary>
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public long? ParentId { get; set; }
-
-    /// <summary>
-    /// عنوان
-    /// </summary>
-    public required string Name { get; set; }
-
-    /// <summary>
     /// زیرمجموعه دسته بندی های محصول
     /// </summary>
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IEnumerable<GetAllProductCategoriesDto>? Children { get; set; }
 }

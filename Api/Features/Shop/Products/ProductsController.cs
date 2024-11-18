@@ -1,4 +1,6 @@
-﻿namespace Api.Features.Shop.Products;
+﻿using Api.Features.Shop.Products.Dtos;
+
+namespace Api.Features.Shop.Products;
 
 /// <summary>
 /// برای کار با محصولات
@@ -9,81 +11,81 @@ public class ProductsController : ApiControllerBase
     #region Queries
 
     /// <summary>
-    /// یافتن دسته بندی محصول با آیدی آن
+    /// یافتن محصول با آیدی آن
     /// </summary>
-    /// <param name="objectId">آیدی دسته بندی محصول</param>
+    /// <param name="objectId">آیدی محصول</param>
     /// <param name="cancellationToken"></param>
-    /// <returns>اطلاعات یک دسته بندی محصول</returns>
-    //[HttpGet("product-categories/{objectId:long:min(1)}")]
-    //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetProductCategoryDto))]
-    //public Task<GetProductCategoryDto> GetProductCategoryAsync([Required][FromRoute] long objectId, CancellationToken cancellationToken)
-    //{
-    //    Queries.GetProductCategory.Query query = new() { ProductCategoryId = objectId };
-    //    return Mediator.Send(query, cancellationToken);
-    //}
+    /// <returns>اطلاعات یک محصول</returns>
+    [HttpGet("products/{objectId:long:min(1)}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetProductDto))]
+    public Task<GetProductDto> GetProductAsync([Required][FromRoute] long objectId, CancellationToken cancellationToken)
+    {
+        Queries.GetProduct.Query query = new() { ProductId = objectId };
+        return Mediator.Send(query, cancellationToken);
+    }
 
     /// <summary>
-    /// یافتن دسته بندی های محصول
+    /// یافتن محصول ها
     /// </summary>
     /// <param name="cancellationToken"></param>
-    /// <returns>اطلاعات دسته بندی های محصول</returns>
-    //[HttpGet("product-categories")]
-    //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<GetAllProductCategoriesDto>))]
-    //public Task<IQueryable<GetAllProductCategoriesDto>> GetAllProductCategoriesAsync(CancellationToken cancellationToken)
-    //{
-    //    Queries.GetAllProductCategories.Query query = new();
-    //    return Mediator.Send(query, cancellationToken);
-    //}
+    /// <returns>اطلاعات محصول ها</returns>
+    [HttpGet("products")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<GetAllProductsDto>))]
+    public Task<IQueryable<GetAllProductsDto>> GetAllProductsAsync(CancellationToken cancellationToken)
+    {
+        Queries.GetAllProducts.Query query = new();
+        return Mediator.Send(query, cancellationToken);
+    }
 
     #endregion
 
     #region Commands
 
     /// <summary>
-    /// ایجاد دسته بندی محصول
+    /// ایجاد محصول
     /// </summary>
-    /// <param name="createProductCategory">اطلاعات دسته بندی محصول برای ایجاد</param>
+    /// <param name="createProduct">اطلاعات محصول برای ایجاد</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Created Id And RowVersion</returns>
-    //[HttpPost("product-categories")]
-    //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
-    //[Consumes("application/json")]
-    //public Task<IdRowVersionGet> CreateProductCategoryAsync([Required][FromBody] CreateProductCategoryDto createProductCategory, CancellationToken cancellationToken)
-    //{
-    //    Commands.CreateProductCategory.Command command = new() { CreateProductCategoryDto = createProductCategory };
-    //    return Mediator.Send(command, cancellationToken);
-    //}
+    [HttpPost("products")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
+    [Consumes("application/json")]
+    public Task<IdRowVersionGet> CreateProductAsync([Required][FromBody] CreateProductDto createProduct, CancellationToken cancellationToken)
+    {
+        Commands.CreateProduct.Command command = new() { CreateProductDto = createProduct };
+        return Mediator.Send(command, cancellationToken);
+    }
 
     /// <summary>
-    /// ویرایش دسته بندی محصول
+    /// ویرایش محصول
     /// </summary>
-    /// <param name="objectId">productCategoryId</param>
-    /// <param name="updateProductCategory">اطلاعات دسته بندی محصول برای ویرایش</param>
+    /// <param name="objectId">productId</param>
+    /// <param name="updateProduct">اطلاعات محصول برای ویرایش</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Updated Id And RowVersion</returns>
-    //[HttpPut("product-categories/{objectId:long:min(1)}")]
-    //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
-    //[Consumes("application/json")]
-    //public Task<IdRowVersionGet> UpdateProductCategoryAsync([Required][FromRoute] long objectId, [Required][FromBody] UpdateProductCategoryDto updateProductCategory, CancellationToken cancellationToken)
-    //{
-    //    Commands.UpdateProductCategory.Command command = new() { ProductCategoryId = objectId, UpdateProductCategoryDto = updateProductCategory };
-    //    return Mediator.Send(command, cancellationToken);
-    //}
+    [HttpPut("products/{objectId:long:min(1)}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
+    [Consumes("application/json")]
+    public Task<IdRowVersionGet> UpdateProductAsync([Required][FromRoute] long objectId, [Required][FromBody] UpdateProductDto updateProduct, CancellationToken cancellationToken)
+    {
+        Commands.UpdateProduct.Command command = new() { ProductId = objectId, UpdateProductDto = updateProduct };
+        return Mediator.Send(command, cancellationToken);
+    }
 
     /// <summary>
-    /// دسته بندی محصول را حذف میکند و یا برمیگرداند
+    /// محصول را حذف میکند و یا برمیگرداند
     /// </summary>
-    /// <param name="idRowVersion">اطلاعات دسته بندی محصول که قرار است حذف شود و یا برگردد</param>
+    /// <param name="idRowVersion">اطلاعات محصول که قرار است حذف شود و یا برگردد</param>
     /// <param name="cancellationToken"></param>
     /// <returns>Deleted Id And RowVersion</returns>
-    //[HttpPatch("product-categories")]
-    //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
-    //[Consumes("application/json")]
-    //public Task<IdRowVersionGet> DeleteProductCategoryAsync([Required][FromBody] IdRowVersion idRowVersion, CancellationToken cancellationToken)
-    //{
-    //    Commands.DeleteProductCategory.Command command = new() { IdRowVersion = idRowVersion };
-    //    return Mediator.Send(command, cancellationToken);
-    //}
+    [HttpPatch("products")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IdRowVersionGet))]
+    [Consumes("application/json")]
+    public Task<IdRowVersionGet> DeleteProductAsync([Required][FromBody] IdRowVersion idRowVersion, CancellationToken cancellationToken)
+    {
+        Commands.DeleteProduct.Command command = new() { IdRowVersion = idRowVersion };
+        return Mediator.Send(command, cancellationToken);
+    }
 
     #endregion
 }
