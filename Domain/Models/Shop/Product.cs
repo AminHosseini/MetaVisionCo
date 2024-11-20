@@ -23,7 +23,7 @@ public class Product : BaseEntity, IHaveSoftDelete, IHaveCreationInfo
     /// <summary>
     /// کد محصول
     /// </summary>
-    public required string Code { get; set; }
+    //public required string Code { get; set; }
 
     /// <summary>
     /// توضیحات کوتاه
@@ -44,7 +44,7 @@ public class Product : BaseEntity, IHaveSoftDelete, IHaveCreationInfo
     public Product()
     {
         Name = string.Empty;
-        Code = string.Empty;
+        //Code = string.Empty;
         ShortDescription = string.Empty;
         Description = string.Empty;
         Seo = new Seo();
@@ -56,7 +56,7 @@ public class Product : BaseEntity, IHaveSoftDelete, IHaveCreationInfo
     {
         Id = id;
         Name = string.Empty;
-        Code = string.Empty;
+        //Code = string.Empty;
         ShortDescription = string.Empty;
         Description = string.Empty;
         Seo = new Seo();

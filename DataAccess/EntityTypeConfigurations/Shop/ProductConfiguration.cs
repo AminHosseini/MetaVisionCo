@@ -1,4 +1,6 @@
-﻿namespace DataAccess.EntityTypeConfigurations.Shop;
+﻿using BaseLib.Context;
+
+namespace DataAccess.EntityTypeConfigurations.Shop;
 
 /// <summary>
 /// کلاس پیکربندی موجودیت های محصول
@@ -24,7 +26,12 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired()
             .HasComment("عنوان");
 
-        builder.Property(p => p.Code)
+        //builder.Property(p => p.Code)
+        //    .HasMaxLength(50)
+        //    .IsRequired()
+        //    .HasComment("کد محصولی");
+
+        builder.Property<string>(ShadowProperty.Code)
             .HasMaxLength(50)
             .IsRequired()
             .HasComment("کد محصولی");

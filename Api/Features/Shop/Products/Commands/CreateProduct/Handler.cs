@@ -36,6 +36,19 @@ public class Handler : IRequestHandler<Command, IdRowVersionGet>
         // This 1 must later be replaced by a real user
         _context.Products.Entry(product).SetCurrentValue(ShadowProperty.CreatedByUser, (long)1);
 
+        var rand = new Random();
+        string code = $"FAS-{rand.Next(1, 9999)}-PROD-{rand.Next(100000, 999999)}";
+        bool exists = await _context.Products.AnyAsync(p => EF.Property<string>(p, ShadowProperty.Code) == code);
+        var i = 0;
+        if (exists)
+        {
+            i++;
+            if (i == 3)
+                throw new RecordNotFoundException();
+            code = $"FAS-{rand.Next(1, 9999)}-PROD-{rand.Next(100000, 999999)}";
+        }
+        _context.Products.Entry(product).SetCurrentValue(ShadowProperty.Code, code);
+
         await _context.Products.AddAsync(product, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 

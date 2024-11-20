@@ -20,9 +20,9 @@ public class UpdateProductDtoValidator : AbstractValidator<UpdateProductDto>
             .NotEmpty().WithMessage(ValidationMessages.NullMessage)
             .MaximumLength(50).WithMessage(ValidationMessages.MaximumCharactersMessage(50));
 
-        RuleFor(p => p.Code)
-            .NotEmpty().WithMessage(ValidationMessages.NullMessage)
-            .MaximumLength(50).WithMessage(ValidationMessages.MaximumCharactersMessage(50));
+        //RuleFor(p => p.Code)
+        //    .NotEmpty().WithMessage(ValidationMessages.NullMessage)
+        //    .MaximumLength(50).WithMessage(ValidationMessages.MaximumCharactersMessage(50));
 
         RuleFor(p => p.ShortDescription)
             .NotEmpty().WithMessage(ValidationMessages.NullMessage)

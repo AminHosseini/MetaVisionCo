@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241117200028_Product-created")]
+    [Migration("20241120201938_Product-created")]
     partial class Productcreated
     {
         /// <inheritdoc />
@@ -96,12 +96,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("کد محصولی");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
@@ -123,6 +117,12 @@ namespace DataAccess.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)")
                         .HasComment("توضیحات کوتاه");
+
+                    b.Property<string>("_Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("کد محصولی");
 
                     b.Property<long>("_CreatedByUser")
                         .HasColumnType("bigint")
