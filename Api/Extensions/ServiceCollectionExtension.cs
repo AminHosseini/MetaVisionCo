@@ -9,8 +9,16 @@ using System.Reflection;
 
 namespace Api.Extensions;
 
+/// <summary>
+/// کلاس کمکی سرویس ها
+/// </summary>
 public static class ServiceCollectionExtension
 {
+    /// <summary>
+    /// سرویس های برنامه
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
@@ -24,6 +32,11 @@ public static class ServiceCollectionExtension
         return services;
     }
 
+    /// <summary>
+    /// mapster سرویس های
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
     public static IServiceCollection AddMapsterConfigurationsServices(this IServiceCollection services)
     {
         ProductCategoryMapConfigs.RegisterMappingConfigurations(services);
@@ -33,6 +46,10 @@ public static class ServiceCollectionExtension
         return services;
     }
 
+    /// <summary>
+    /// EDM مدل
+    /// </summary>
+    /// <returns></returns>
     public static IEdmModel GetEdmModel()
     {
         var builder = new ODataConventionModelBuilder();

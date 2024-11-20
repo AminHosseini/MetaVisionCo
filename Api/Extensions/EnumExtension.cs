@@ -3,11 +3,18 @@ using System.ComponentModel;
 using System.Reflection;
 
 namespace Api.Extensions;
+
+/// <summary>
+/// ها enum کلاس متود های کمکی
+/// </summary>
 public static class EnumExtension
 {
     private static ConcurrentDictionary<string, Type>? _enumTypeDictionary;
     private static IEnumerable<Type>? _enumTypes;
 
+    /// <summary>
+    ///  ها enum گرفتن تمامی انواع
+    /// </summary>
     public static IEnumerable<Type> EnumTypes
     {
         get
@@ -22,12 +29,23 @@ public static class EnumExtension
         }
     }
 
+    /// <summary>
+    /// enum گرفتن کامنت موجود بر روی یک
+    /// </summary>
+    /// <param name="value">enum نوع</param>
+    /// <returns></returns>
     private static string GetDescription(this Enum value)
     {
         FieldInfo? fieldInfo = value?.GetType()?.GetField(value.ToString());
         return fieldInfo?.GetCustomAttribute<DescriptionAttribute>()?.Description ?? string.Empty;
     }
 
+    /// <summary>
+    /// enum گرفتن کامنت موجود بر روی یک
+    /// </summary>
+    /// <typeparam name="TEnum"></typeparam>
+    /// <param name="enum"></param>
+    /// <returns></returns>
     public static IEnumerable<string> GetDescriptions<TEnum>(this TEnum @enum) where TEnum : Enum
     {
         static IEnumerable<string> GetDescriptionsInternal(TEnum @enum)
@@ -45,6 +63,12 @@ public static class EnumExtension
         return GetDescriptionsInternal(@enum);
     }
 
+    /// <summary>
+    /// ها enum گرفتن لیست
+    /// </summary>
+    /// <typeparam name="TEnum"></typeparam>
+    /// <param name="enum"></param>
+    /// <returns></returns>
     public static IEnumerable<(int Id, string Description)> GetEnumList<TEnum>(this TEnum @enum) where TEnum : Enum
     {
         static IEnumerable<(int Id, string Description)> GetٍEnumListInternal(TEnum @enum)
@@ -63,6 +87,12 @@ public static class EnumExtension
         return GetٍEnumListInternal(@enum);
     }
 
+    /// <summary>
+    /// enum گرفتن نوع
+    /// </summary>
+    /// <param name="typeName"></param>
+    /// <param name="success"></param>
+    /// <returns></returns>
     public static Type GetEnumType(string typeName, out bool success)
     {
         ArgumentNullException.ThrowIfNull(typeName);
@@ -95,6 +125,11 @@ public static class EnumExtension
         return _enumTypeDictionary[key];
     }
 
+    /// <summary>
+    /// ها enum گرفتن کامنت موجود بر روی
+    /// </summary>
+    /// <param name="enumType"></param>
+    /// <returns></returns>
     public static IList<GetAllDto> GetEnumDescriptions(Type enumType)
     {
 #pragma warning disable CA1305 // Specify IFormatProvider
