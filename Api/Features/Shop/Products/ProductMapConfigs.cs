@@ -39,7 +39,7 @@ public static class ProductMapConfigs
             .Map(dest => dest.ProductId, src => src.Product.Id)
             .Map(dest => dest.ProductCategoryName, src => src.ProductCategory.Name)
             .Map(dest => dest.Name, src => src.Product.Name)
-            //.Map(dest => dest.Code, src => src.Product.Code)
+            .Map(dest => dest.Code, src => EF.Property<string>(src.Product, ShadowProperty.Code))
             .Map(dest => dest.IsDeleted, src => EF.Property<bool>(src.Product, ShadowProperty.IsDeleted))
             .Map(dest => dest.RowVersion, src => EF.Property<byte[]>(src.Product, ShadowProperty.RowVersion));
     }
